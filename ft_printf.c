@@ -14,20 +14,20 @@
 int	ft_printf(const char *s, ...)
 {
 	va_list args;
-	int	reach;
 	int	i;
 	int count;
 
 	va_start(args,s);	
 	count = 0;
 	i = 0;
-	reach = 0;
 	while(s[i])
 	{	
 		if (s[i] == '%')
 		{
 			count = parsing(s[i + 1],args);
 		}
+		else
+			ft_putchar_fd(s[i],1);
 		i++;
 	}
 	va_end(args);

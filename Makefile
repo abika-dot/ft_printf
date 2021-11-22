@@ -18,13 +18,16 @@ OBJ= ${SRC:.c=.o}
 CC = gcc
 FLAGS= -Wall -Wextra -Werror
 HEADER= ft_printf.h
-FTHEADER= libft/libft.h
+FTLIB= libft/libft.a
 NAME= libftprintf.a
 
 all: ${NAME}
 
+${FTLIB}:
+	cd libft; make
 
-${NAME}: ${OBJ} ${HEADER} ${FTHEADER}
+${NAME}: ${OBJ} ${HEADER} ${FTLIB} 
+	mv ${FTLIB} ${NAME}
 	${CC} -c ${FLAGS} ${SRC}
 	ar -rcs ${NAME} ${OBJ}
 

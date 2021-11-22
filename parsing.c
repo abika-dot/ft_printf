@@ -54,7 +54,7 @@ static	int	parsing_end(char c,va_list args)
 	else if (c == 'p')
 	{
 		p = va_arg(args, void*);
-		len = hex_convert((unsigned int)p,2);
+		len = hex_convert((int64_t)p,2);
 	}
 	return (len);
 }
