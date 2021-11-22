@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/08 18:22:31 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:32:32 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	unsigned int	i;
+	char			*mapi;
+
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
+	if (!s)
+		return (NULL);
+	mapi = ft_strdup(s);
+	if (!mapi)
+		return (NULL);
+	while (mapi[i])
+	{
+		mapi[i] = (*f)(i, mapi[i]);
 		i++;
 	}
-	va_end(args);
-	return (count + i);
+	return (mapi);
 }

@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/03 18:31:04 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:17:03 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
+char	*ft_strdup(const char *s1)
+{
+	int		i;
+	int		s;
+	char	*str;
+
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
+	s = ft_strlen(s1);
+	str = malloc(((size_t)s) * sizeof(char) + 1);
+	if (!str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
 		i++;
 	}
-	va_end(args);
-	return (count + i);
+	str[i] = '\0';
+	return (str);
 }

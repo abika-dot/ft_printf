@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/01 11:20:48 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 04:50:21 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
-	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
-		i++;
-	}
-	va_end(args);
-	return (count + i);
+int	ft_isalnum(int c)
+{
+	if ((c >= '0' && c <= '9')
+		|| (c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
 }

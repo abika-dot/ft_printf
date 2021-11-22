@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   nbrlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/22 00:12:31 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/22 02:39:44 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
+int	nbrlen(int n)
 {
-	va_list args;
-	int	reach;
 	int	i;
-	int count;
 
-	va_start(args,s);	
-	count = 0;
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
+	if (n == 0)
+		return (1);
+	while (n)
+	{
+		n /= 10;
 		i++;
 	}
-	va_end(args);
-	return (count + i);
+	return (i);
 }

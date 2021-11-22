@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/08 19:48:10 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:15:02 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
+
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
 		i++;
 	}
-	va_end(args);
-	return (count + i);
+	write(fd, "\n", 1);
 }

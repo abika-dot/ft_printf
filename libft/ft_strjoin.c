@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/12 02:28:19 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:28:36 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*ss;
+	int		ln1;
+	int		ln2;
+	int		i;
+	int		j;
+
+	j = 0;
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
-		i++;
+	if (!s1 || !s2)
+		return (NULL);
+	ln1 = ft_strlen(s1);
+	ln2 = ft_strlen(s2);
+	ss = malloc((ln1 + ln2) * sizeof(char) + 1);
+	if (!ss)
+		return (NULL);
+	ft_memcpy(ss, s1, ln1);
+	while (s2[j])
+	{
+		ss[ln1 + j] = s2[j];
+		j++;
 	}
-	va_end(args);
-	return (count + i);
+	ss[ln1 + ln2] = 0;
+	return (ss);
 }

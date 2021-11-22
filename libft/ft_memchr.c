@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/03 14:55:54 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:12:01 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*ss;
+	unsigned char	cc;
+	size_t			i;
+
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
+	cc = (unsigned char) c;
+	ss = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (ss[i] == cc)
+			return (&ss[i]);
 		i++;
 	}
-	va_end(args);
-	return (count + i);
+	return (NULL);
 }

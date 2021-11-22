@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/09 17:14:17 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:12:58 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t	i;
+	char	*ddst;
+	char	*ssrc;
+
+	ssrc = (char *)src;
+	ddst = (char *)dst;
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
-		i++;
+	if (ssrc == ddst)
+		return (dst);
+	else if (ssrc < ddst)
+	{
+		while (len--)
+			ddst[len] = ssrc[len];
 	}
-	va_end(args);
-	return (count + i);
+	else
+	{
+		while (src && len != i)
+		{
+			ddst[i] = ssrc[i];
+			i++;
+		}
+	}
+	return (dst);
 }

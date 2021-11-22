@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/03 17:21:10 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:31:23 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	count;
+	size_t	i;
+
 	count = 0;
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
+	while (src[count])
+		count++;
+	if (dstsize == 0)
+		return (count);
+	while (src[i] && dstsize != 0 && i < dstsize - 1)
+	{
+		dst[i] = src[i];
 		i++;
 	}
-	va_end(args);
-	return (count + i);
+	dst[i] = '\0';
+	return (count);
 }

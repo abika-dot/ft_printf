@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 23:09:05 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 04:02:15 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/11 01:00:46 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/17 05:30:36 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
-#include "libft/libft.h"
-int	ft_printf(const char *s, ...)
-{
-	va_list args;
-	int	reach;
-	int	i;
-	int count;
+#include "libft.h"
 
-	va_start(args,s);	
-	count = 0;
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t		dlen;
+	size_t		slen;
+	size_t		i;
+
 	i = 0;
-	reach = 0;
-	while(s[i])
-	{	
-		if (s[i] == '%')
-		{
-			count = parsing(s[i + 1],args);
-		}
+	slen = ft_strlen(src);
+	dlen = ft_strlen(dst);
+	if (dstsize < dlen)
+		return (slen + dstsize);
+	while (src[i] && (dstsize - 1) > (dlen + i) && dstsize != 0)
+	{
+		dst[i + dlen] = src[i];
 		i++;
 	}
-	va_end(args);
-	return (count + i);
+	dst[dlen + i] = '\0';
+	return (dlen + slen);
 }
