@@ -24,15 +24,16 @@ NAME= libftprintf.a
 all: ${NAME}
 
 ${FTLIB}:
-	cd libft; make
+	@cd libft; make
 
 ${NAME}: ${OBJ} ${HEADER} ${FTLIB} 
-	mv ${FTLIB} ${NAME}
+	@mv ${FTLIB} ${NAME}
 	${CC} -c ${FLAGS} ${SRC}
-	ar -rcs ${NAME} ${OBJ}
+	@ar -rcs ${NAME} ${OBJ}
 
 clean:
 	@rm -f ${OBJ}
+	@cd libft; make clean
 
 fclean: clean
 	@rm -f ${NAME}
