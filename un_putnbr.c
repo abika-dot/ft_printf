@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   un_ft_putnbr_fd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/22 00:32:03 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/22 22:41:36 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/22 21:21:56 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/22 22:41:20 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft/libft.h"
 #include "ft_printf.h"
-
-int print(char *s)
+int un_putnbr(unsigned int nb, int fd)
 {
-	int	i;
+	unsigned	int	a;
+	int				len;
 
-	i = 0;
-	while(s[i])
+	a = nb;
+	if (a > 9)
 	{
-		ft_putchar_fd(s[i],1);
-		i++;
+		ft_putnbr_fd(a / 10, fd);
+		ft_putnbr_fd(a % 10, fd);
 	}
-	return (i);
+	else
+		ft_putchar_fd(a + '0', fd);
+	len = 0;
+	if (nb == 0)
+		len = 1;
+	while (nb > 0)
+	{
+		len++;
+		nb /= 10;
+	}
+	return (len);
 }
-

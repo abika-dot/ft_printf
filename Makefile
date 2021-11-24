@@ -6,12 +6,12 @@
 #    By: ozahir <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 03:03:04 by ozahir            #+#    #+#              #
-#    Updated: 2021/11/22 04:39:44 by ozahir           ###   ########.fr        #
+#    Updated: 2021/11/22 21:35:59 by ozahir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_printf.c	hex_convert.c	nbrlen.c \
-	print.c	parsing.c
+SRC =	ft_printf.c	hex_convert.c	nbrlen.c \
+	print.c	 un_putnbr.c parsing.c	
 
 OBJ= ${SRC:.c=.o}
 
