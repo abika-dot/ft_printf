@@ -5,68 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 02:59:47 by ozahir            #+#    #+#             */
-/*   Updated: 2021/11/25 05:05:42 by ozahir           ###   ########.fr       */
+/*   Created: 2021/11/27 15:41:45 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/27 16:09:33 by ozahir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static	int r_print(char *s, int len, int state)
-{
-	int i;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_hex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ozahir <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/26 20:20:11 by ozahir            #+#    #+#             */
+/*   Updated: 2021/11/27 15:41:16 by ozahir           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "ft_printf.h"
 
-	i = 0;
-	if (state == 2)
-	{
-		i += putchar_fd('0',1);
-		i += putchar_fd('x',1);
-	}
-	while(len != -1)
-	{
-		if (state == 1 && s[len] > "9")
-			s[len] -= 32;
-		ft_putchar_fd(s[len],1);	
-		len--;
-		i++;
-	}
-	return (i);
-}
-static int	h_nbrlen(unsigned long n)
+int	pointerp(unsigned long int nb)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	if (n < 0)
-		i++;
-	if (n == 0)
-		return (1);
-	while (n)
+	len = 0;
+	if (nb >= 16)
 	{
-		n /= 16;
-		i++;
+		len += pointerp(nb / 16);
+		len += pointerp(nb % 16);
 	}
-	return (i);
+	else if (nb > 9)
+		len += putchar_fd(nb + 87, 1);
+	else
+		len += putchar_fd(nb + '0', 1);
+	return (len);
 }
 
-int	hex_convert(unsigned long n, int state)
+int	hex_convert(unsigned int nb, int state)
 {
-	char				*s;
-	int					i;
-	unsigned	long		rem;
-	
-	rem = n;
-	s = malloc((h_nbrlen(n) + 1) * sizeof(char));
-	i = 0;
-	while (n)
+	int	len;
+	int	stating;
+
+	stating = 0;
+	len = 0;
+	if (state == 1)
+		stating = -32;
+	if (nb >= 16)
 	{
-		rem = n % 16;
-		n = n / 16;
-		if ( rem >= 0 && rem <= 9)
-			rem += '0';
-		else if (rem > 9)
-			rem += 55;
-		s[i] = rem;
-		i++;
+		len += hex_convert(nb / 16, state);
+		len += hex_convert(nb % 16, state);
 	}
-	s[i] = 0;
-	return (r_print(s,i - 1 ,state));
+	else if (nb > 9)
+		len += putchar_fd(nb + 87 + stating, 1);
+	else
+		len += putchar_fd(nb + '0', 1);
+	return (len);
 }

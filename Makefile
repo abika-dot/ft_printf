@@ -5,37 +5,32 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ozahir <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/22 03:03:04 by ozahir            #+#    #+#              #
-#    Updated: 2021/11/22 21:35:59 by ozahir           ###   ########.fr        #
+#    Created: 2021/11/25 16:45:21 by ozahir            #+#    #+#              #
+#    Updated: 2021/11/27 16:03:40 by ozahir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	ft_printf.c	hex_convert.c	nbrlen.c \
-	print.c	 un_putnbr.c parsing.c	
-
+CC= gcc
+FLAGS=  -c -Wall -Werror -Wextra
+NAME= libftprintf.a
+HRADER= ft_printf.h
+SRC= numbers.c	parsparam.c \
+	ft_printf.c	p_hex.c	\
+	strndchar.c
 OBJ= ${SRC:.c=.o}
 
-CC = gcc
-FLAGS= -Wall -Wextra -Werror
-HEADER= ft_printf.h
-FTLIB= libft/libft.a
-NAME= libftprintf.a
+${NAME} : ${OBJ} ${HEADER}
+	@${CC} ${FLAGS} ${SRC}
+	@ar -rc ${NAME} ${OBJ}
+
+clean:
+	rm -rf ${OBJ}
+
+fclean:	clean
+	rm -rf ${NAME}
+
+re:	fclean all
 
 all: ${NAME}
 
-${FTLIB}:
-	@cd libft; make
 
-${NAME}: ${OBJ} ${HEADER} ${FTLIB} 
-	@mv ${FTLIB} ${NAME}
-	${CC} -c ${FLAGS} ${SRC}
-	@ar -rcs ${NAME} ${OBJ}
-
-clean:
-	@rm -f ${OBJ}
-	@cd libft; make clean
-
-fclean: clean
-	@rm -f ${NAME}
-
-re: fclean all
